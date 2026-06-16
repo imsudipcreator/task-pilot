@@ -30,3 +30,17 @@ def add_todo(config: RunnableConfig, todo_text: str):
     todo_id = db.add_todo(user_id, todo_text)
 
     return f"Todo added successfully with id {todo_id}"
+
+
+@tool
+def mark_todo_done(todo_id: int):
+    """
+    Used to delete a todo (mark it done) from the database using todo_id
+    """
+    print("[TOOL_CALLED] mark_todo_done")
+
+    db = Database()
+    if not db.mark_done(todo_id):
+        return f"Todo {todo_id} not found"
+
+    return f"Todo {todo_id} is deleted successfully"

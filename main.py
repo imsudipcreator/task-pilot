@@ -1,5 +1,5 @@
 from database import Database
-from handlers import start, help, todo, remind, ai, unknown
+from handlers import start, help, todo, remind, ai, qr, unknown
 from utils import restore_reminders
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters
 from dotenv import load_dotenv
@@ -20,6 +20,7 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("help", help))
     app.add_handler(CommandHandler("todo", todo))
     app.add_handler(CommandHandler("remind", remind))
+    app.add_handler(CommandHandler("qr", qr))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, ai))
 
     app.add_handler(MessageHandler(filters.COMMAND, unknown))

@@ -34,7 +34,7 @@ async def send_reminder(context: ContextTypes.DEFAULT_TYPE) -> None:
 def restore_reminders(job_queue: JobQueue) -> None:
     db = Database()
     reminders = db.get_pending_reminders()
-
+    print("[INFO] Restoring reminders", reminders)
     for reminder in reminders:
 
         reminder_id = reminder[0]
@@ -42,4 +42,4 @@ def restore_reminders(job_queue: JobQueue) -> None:
         message = reminder[2]
         remind_at = reminder[3]
 
-        schedule_reminder(job_queue, reminder_id, chat_id, message, remind_at)
+        schedule_reminder(job_queue, reminder_id, chat_id, remind_at, message)

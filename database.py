@@ -122,15 +122,15 @@ class Database:
     def get_reminders(self, user_id: int) -> list[tuple[int, str, int]]:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute(
-                "SELECT id, message, remind_at FROM reminders WHERE user_id = ?",
-                (user_id,),
+                "SELECT id, message, remind_at FROM reminders WHERE remind_at > ? AND user_id = ?",
+                (int(time.time()), user_id),
             )
             return cursor.fetchall()
 
     def get_pending_reminders(self) -> list[tuple[int, str, int]]:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute(
-                "SELECT id, message, remind_at FROM reminders WHERE remind_at > ?",
+                "SELECT id, user_id, message, remind_at FROM reminders WHERE remind_at > ?",
                 (int(time.time()),),
             )
             return cursor.fetchall()

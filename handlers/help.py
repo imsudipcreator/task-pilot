@@ -6,7 +6,7 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     help_text = """Use the bot by following the commands:
     /start - Register yourself in the bot
     /help - Get this message
-    /ai <question> - Ask anything to Pilot AI
+    /qr <text> - Generate a QR code for the given text
         
     /todo <command>
         add <todo> - Add a new todo
